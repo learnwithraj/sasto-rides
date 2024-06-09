@@ -57,8 +57,8 @@ class OtpScreen extends StatelessWidget {
 
 Widget otpTextField(BuildContext context) {
   return SizedBox(
-    width: 64,
-    height: 68,
+    width: MediaQuery.of(context).size.width * 0.13,
+    height: MediaQuery.of(context).size.width * 0.2,
     child: TextFormField(
       onChanged: (value) {
         if (value.length == 1) {
