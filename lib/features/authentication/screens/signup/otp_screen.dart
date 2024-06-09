@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class OtpScreen extends StatelessWidget {
   const OtpScreen({super.key});
@@ -22,19 +23,14 @@ class OtpScreen extends StatelessWidget {
                   child: Column(
                     children: [
                       Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Expanded(child: TextFormField()),
-                          SizedBox(width: 5),
-                          Expanded(child: TextFormField()),
-                          SizedBox(width: 5),
-                          Expanded(child: TextFormField()),
-                          SizedBox(width: 5),
-                          Expanded(child: TextFormField()),
-                          SizedBox(width: 5),
-                          Expanded(child: TextFormField()),
-                          SizedBox(width: 5),
-                          Expanded(child: TextFormField()),
-                          SizedBox(width: 5),
+                          otpTextField(context),
+                          otpTextField(context),
+                          otpTextField(context),
+                          otpTextField(context),
+                          otpTextField(context),
+                          otpTextField(context),
                         ],
                       ),
                       const SizedBox(height: 20),
@@ -57,4 +53,25 @@ class OtpScreen extends StatelessWidget {
       ),
     );
   }
+}
+
+Widget otpTextField(BuildContext context) {
+  return SizedBox(
+    width: 64,
+    height: 68,
+    child: TextFormField(
+      onChanged: (value) {
+        if (value.length == 1) {
+          FocusScope.of(context).nextFocus();
+        }
+      },
+      inputFormatters: [
+        LengthLimitingTextInputFormatter(1),
+        FilteringTextInputFormatter.digitsOnly
+      ],
+      keyboardType: TextInputType.phone,
+      textAlign: TextAlign.center,
+      style: Theme.of(context).textTheme.bodyMedium,
+    ),
+  );
 }
